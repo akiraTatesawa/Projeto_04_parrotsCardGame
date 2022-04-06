@@ -43,6 +43,7 @@ h1 {
     border-radius: 5px;
     box-shadow: 0px 0px 6px lightgray;
     margin: 34px;
+    cursor: pointer;
 }
 
 .carta img {
