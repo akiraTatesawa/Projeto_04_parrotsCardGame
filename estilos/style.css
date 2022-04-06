@@ -1,0 +1,71 @@
+* {
+    box-sizing: border-box;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Encode+Sans:wght@100;200;300;400;500;600;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap');
+
+body {
+    font-family: 'Encode Sans', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    background-color: rgb(238, 249, 191, 1);
+}
+
+h1 {
+    font-size: 56px;
+    font-weight: bold;
+    color: rgb(117, 183, 158, 1);
+    margin-bottom: 55px;
+    text-align: center;
+}
+
+.conteudo {
+    margin: 40px 116px 153px 116px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cartas {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.carta {
+    width: 117px;
+    height: 146px;
+    padding: 23px 6.5px;
+    background-color: rgb(167, 233, 175, 1);
+    border: 1px solid rgb(153, 206, 168, 1);
+    border-radius: 5px;
+}
+
+.carta img {
+    width: 100px;
+    height: 100px;
+}
+
+@media (max-width: 630px) {
+    .conteudo {
+        margin: 0;
+        margin: 40px auto;
+    }
+    
+    h1 {
+        font-size: 36px;
+        text-align: center;
+        margin-bottom: 45px;
+    }
+    
+    .cartas {
+        flex-direction: column;
+    }
+
+    .carta {
+        margin-bottom: 34px;;
+    }
+
+   
+}
