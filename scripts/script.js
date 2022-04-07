@@ -30,16 +30,38 @@ function iniciaJogo() {
     const numeroCartas = pedeNumCartas();
     imagens.sort(comparador);
     
-    for (i = 0; i < numeroCartas/2; i++) {
-        cartasArr.push(`<div class='carta'>\n  <img src='media/${imagens[i]}' alt='GIF de um papagaio animado'/>\n</div>`);
-        cartasArr.push(`<div class='carta'>\n  <img src='media/${imagens[i]}' alt='GIF de um papagaio animado'/>\n</div>`);
+    for (let i = 0; i < numeroCartas/2; i++) {
+        cartasArr.push(`
+        <div class='carta_container' onclick="giraCarta(this)">
+            <div class="carta frontal">
+                <img src='./media/front.png' alt='Ilustração de um papagaio'/>
+            </div>
+            <div class="carta traseira">
+                <img src='./media/${imagens[i]}' alt='GIF de um papagaio animado'/>
+            </div>
+        </div>
+        `);
+        cartasArr.push(`
+        <div class='carta_container' onclick="giraCarta(this)">
+            <div class="carta frontal">
+                <img src='./media/front.png' alt='Ilustração de um papagaio'/>
+            </div>
+            <div class="carta traseira">
+                <img src='./media/${imagens[i]}' alt='GIF de um papagaio animado'/>
+            </div>
+        </div>
+        `);
     }
     cartasArr.sort(comparador);
     
     cartas = document.querySelector(".cartas");
-    for (j = 0; j < cartasArr.length; j++) {
+    for (let j = 0; j < cartasArr.length; j++) {
         cartas.innerHTML += cartasArr[j];
     }
+}
+
+function giraCarta(el) {
+    el.classList.toggle("gira");
 }
 
 iniciaJogo()
