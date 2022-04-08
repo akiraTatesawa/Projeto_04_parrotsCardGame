@@ -28,7 +28,7 @@ function pedeNumCartas () {
     let numValido = false;
 
     do {
-        numCartas = prompt("Digite o número de cartas");
+        numCartas = prompt("Digite o número de cartas\nInsira um número entre 4 e 14:");
         if (numCartas%2 === 0 && (numCartas >= 4 && numCartas <= 14)) {
             numValido = true;
         }
@@ -109,6 +109,7 @@ function giraCarta (el) {
     }
 
     if (armazenaCartasViradas.length === 2) {
+        document.querySelector(".conteudo").classList.add("sem_clique");
         if (armazenaCartasViradas[0] === armazenaCartasViradas[1]) {
             console.log("é igual");
             removeOnclick();
@@ -121,6 +122,9 @@ function giraCarta (el) {
             setTimeout(removeGiraDuasCartas, 2000);
             armazenaCartasViradas = [];
         }
+        setTimeout(function () {
+            document.querySelector(".conteudo").classList.remove("sem_clique");
+        }, 2000);
     }
 
     contaJogadas++;
