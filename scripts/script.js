@@ -119,12 +119,12 @@ function giraCarta (el) {
             console.log(contaAcertos);
         } else {
             console.log("é diferente");
-            setTimeout(removeGiraDuasCartas, 2000);
+            setTimeout(removeGiraDuasCartas, 1500);
             armazenaCartasViradas = [];
         }
         setTimeout(function () {
             document.querySelector(".conteudo").classList.remove("sem_clique");
-        }, 2000);
+        }, 1500);
     }
 
     contaJogadas++;
