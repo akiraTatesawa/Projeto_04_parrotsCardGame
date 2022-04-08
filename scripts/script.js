@@ -1,11 +1,14 @@
-const imagens = ["bobrossparrot.gif", "explodyparrot.gif", "fiestaparrot.gif", "metalparrot.gif", "revertitparrot.gif", "tripletsparrot.gif", "unicornparrot.gif"];
-let cartas;
+const parrots = ["bobrossparrot", "explodyparrot", "fiestaparrot", "metalparrot", "revertitparrot", "tripletsparrot", "unicornparrot"];
+const cartasArr = [];
 
-function comparador() { 
+// [{nome: "bobrossparrot", status: "frente"}, {nome: "explodyparrot", status: "frente"}, ...]
+
+
+function comparador () { 
 	return Math.random() - 0.5; 
 }
 
-function pedeNumCartas() {
+function pedeNumCartas () {
     let numCartas;
     let numValido = false;
 
@@ -15,53 +18,66 @@ function pedeNumCartas() {
             numValido = true;
         }
     } while (!numValido);
-
     return numCartas;
 }
 
-//embaralhar as imagens
-//dividir o numCartas por 2
-//adicionar uma carta * 2 numa lista 
-//embaralhar as cartas
-//colocar as cartas no DOM
-
-function iniciaJogo() {
-    const cartasArr = [];
-    const numeroCartas = pedeNumCartas();
-    imagens.sort(comparador);
-    
+function distribuiCartas (numeroCartas) {
     for (let i = 0; i < numeroCartas/2; i++) {
-        cartasArr.push(`
-        <div class='carta_container' onclick="giraCarta(this)">
-            <div class="carta frontal">
-                <img src='./media/front.png' alt='Ilustração de um papagaio'/>
-            </div>
-            <div class="carta traseira">
-                <img src='./media/${imagens[i]}' alt='GIF de um papagaio animado'/>
-            </div>
-        </div>
-        `);
-        cartasArr.push(`
-        <div class='carta_container' onclick="giraCarta(this)">
-            <div class="carta frontal">
-                <img src='./media/front.png' alt='Ilustração de um papagaio'/>
-            </div>
-            <div class="carta traseira">
-                <img src='./media/${imagens[i]}' alt='GIF de um papagaio animado'/>
-            </div>
-        </div>
-        `);
+        cartasArr.push({nome: parrots[i], status: "frente", par: "1"})
+        cartasArr.push({nome: parrots[i], status: "frente", par: "2"})
     }
     cartasArr.sort(comparador);
-    
-    cartas = document.querySelector(".cartas");
-    for (let j = 0; j < cartasArr.length; j++) {
-        cartas.innerHTML += cartasArr[j];
+    console.log(cartasArr); 
+
+    let cartas = document.querySelector(".cartas");
+    for (let i = 0; i < cartasArr.length; i++) {
+        cartas.innerHTML += 
+        `<div class='carta_container' onclick="giraCarta(this)">
+            <div class="carta frontal">
+                <img src='./media/front.png' alt='Ilustração de um papagaio'/>
+            </div>
+            <div class="carta traseira">
+                <img src='./media/${cartasArr[i].nome}.gif' alt='GIF de um papagaio animado'/>
+            </div>
+        </div>`
     }
 }
 
-function giraCarta(el) {
-    el.classList.toggle("gira");
+
+function iniciaJogo () {
+    const numeroCartas = pedeNumCartas();
+    parrots.sort(comparador);
+    distribuiCartas(numeroCartas);
 }
 
+function giraCarta (el) {
+    el.classList.add("gira");
+}
+
+
 iniciaJogo()
+
+
+
+// for (let i = 0; i < numeroCartas/2; i++) {
+//     cartasArr.push(`
+//     <div class='carta_container' onclick="giraCarta(this)">
+//         <div class="carta frontal">
+//             <img src='./media/front.png' alt='Ilustração de um papagaio'/>
+//         </div>
+//         <div class="carta traseira">
+//             <img src='./media/${cartasArr[i].nome}.gif' alt='GIF de um papagaio animado'/>
+//         </div>
+//     </div>
+//     `);
+//     cartasArr.push(`
+//     <div class='carta_container' onclick="giraCarta(this)">
+//         <div class="carta frontal">
+//             <img src='./media/front.png' alt='Ilustração de um papagaio'/>
+//         </div>
+//         <div class="carta traseira">
+//             <img src='./media/${imagens[i]}' alt='GIF de um papagaio animado'/>
+//         </div>
+//     </div>
+//     `);
+// }
