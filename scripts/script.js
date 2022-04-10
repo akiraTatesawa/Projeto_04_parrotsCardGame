@@ -12,7 +12,8 @@ let armazenaCodigoCartasViradas = [];
 let armazenaCartasViradas = [];
 let contaAcertos = 0;
 let contaJogadas = 0;
-
+let segundos;
+let timerInterval;
 
 function comparador () { 
 	return Math.random() - 0.5; 
@@ -24,7 +25,7 @@ function pedeNumCartas () {
     let numValido = false;
 
     do {
-        numCartas = prompt("Digite o número de cartas\n[Insira um número par entre 4 e 14]");
+        numCartas = prompt("Digite o número de cartas:\n[Insira um número par entre 4 e 14]");
         if (numCartas%2 === 0 && (numCartas >= 4 && numCartas <= 14)) {
             numValido = true;
         }
@@ -60,21 +61,23 @@ function distribuiCartas (numeroCartas) {
 }
 
 function iniciaJogo () {
-//  Recebe um número de cartas e realiza o embaralhamento e sorteio
+//  Recebe um número de cartas, realiza o embaralhamento/sorteio e inicia o timer;
     const numeroCartas = pedeNumCartas();
     parrots.sort(comparador);
     distribuiCartas(numeroCartas);
-    //iniciaTimer();
+    iniciaTimer();
 }
 
-// function iniciaTimer () {
-//     const timer = document.querySelector(".timer");
-//     let segundos = 0;
-//     const timerInterval = setInterval(function () {
-//         segundos ++;
-//         timer.innerHTML = `${segundos}`;
-//     }, 1000);
-// }
+function iniciaTimer () {
+// 
+    segundos = 0;
+    const timer = document.querySelector(".timer");
+    timer.innerHTML = `${segundos}`;
+    timerInterval = setInterval(function () {
+        segundos ++;
+        timer.innerHTML = `${segundos}`;
+    }, 1000);
+}
 
 function removeOnclick () {
 //  Remove permanentemente o onclick das cartas que já foram pontuadas
@@ -97,7 +100,9 @@ function removeGiraDuasCartas() {
 }
 
 function fim () {
-    alert(`Você ganhou em ${contaJogadas} jogadas!`);
+// Pausa o timer e exibe o alert de fim e pergunta se o jogador deseja recomeçar
+    clearInterval(timerInterval);
+    alert(`Você ganhou em ${contaJogadas} jogadas!\nTempo: ${segundos} segundos.`);
     let pergunta;
     do {
         pergunta = prompt("Deseja jogar novamente?\n[sim/não]")
