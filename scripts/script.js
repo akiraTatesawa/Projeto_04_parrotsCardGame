@@ -69,7 +69,7 @@ function iniciaJogo () {
 }
 
 function iniciaTimer () {
-// 
+
     segundos = 0;
     const timer = document.querySelector(".timer");
     timer.innerHTML = `${segundos}`;
@@ -91,12 +91,31 @@ function adicionaOnclick () {
     armazenaCodigoCartasViradas[1].setAttribute("onclick", "giraCarta(this)");
 }
 
-function removeGiraDuasCartas() {
+function removeGiraDuasCartas () {
 //  Remove a classe de transição das cartas que foram viradas, porém não eram iguais
     armazenaCodigoCartasViradas[0].classList.remove("gira");
     armazenaCodigoCartasViradas[1].classList.remove("gira");
     adicionaOnclick();
     armazenaCodigoCartasViradas = [];
+}
+
+function verificaCartasViradas () {
+//  Confere se as cartas viradas são iguais ou não e retira o clique do site enquanto isso
+    if (armazenaCartasViradas.length === 2) {
+        document.querySelector(".conteudo").classList.add("sem_clique");
+        if (armazenaCartasViradas[0] === armazenaCartasViradas[1]) {
+            removeOnclick();
+            armazenaCartasViradas = [];
+            armazenaCodigoCartasViradas = [];
+            contaAcertos++;
+        } else {
+            setTimeout(removeGiraDuasCartas, 1500);
+            armazenaCartasViradas = [];
+        }
+        setTimeout(function () {
+            document.querySelector(".conteudo").classList.remove("sem_clique");
+        }, 1500);
+    }
 }
 
 function fim () {
@@ -137,26 +156,12 @@ function giraCarta (el) {
         armazenaCodigoCartasViradas[i].removeAttribute("onclick");
     }
 
-//  Confere se as cartas viradas são iguais ou não e retira o clique do site enquanto isso
-    if (armazenaCartasViradas.length === 2) {
-        document.querySelector(".conteudo").classList.add("sem_clique");
-        if (armazenaCartasViradas[0] === armazenaCartasViradas[1]) {
-            removeOnclick();
-            armazenaCartasViradas = [];
-            armazenaCodigoCartasViradas = [];
-            contaAcertos++;
-        } else {
-            setTimeout(removeGiraDuasCartas, 1500);
-            armazenaCartasViradas = [];
-        }
-        setTimeout(function () {
-            document.querySelector(".conteudo").classList.remove("sem_clique");
-        }, 1500);
-    }
+    verificaCartasViradas();
 
 //  Acrescenta o número de jogadas e verifica se o jogo acabou
     contaJogadas++;
     verificaFim(cartasArr.length);
 }
+
 
 iniciaJogo();
