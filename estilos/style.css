@@ -66,6 +66,21 @@ h1 {
     height: 100px;
 }
 
+.timer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    right: 1%;
+    top: 0.5%;
+    width: 50px;
+    height: 30px;
+    background-color: white;
+    box-shadow: 0px 0px 6px lightgray;
+    color: rgb(117, 183, 158, 1);
+    font-weight: bold;
+}
+
 .gira {
     transform: translateX(-100%) rotateY(-180deg);
 }
