@@ -108,13 +108,16 @@ function verificaCartasViradas () {
             armazenaCartasViradas = [];
             armazenaCodigoCartasViradas = [];
             contaAcertos++;
+            setTimeout(function () {
+                document.querySelector(".conteudo").classList.remove("sem_clique");
+            }, 700);
         } else {
             setTimeout(removeGiraDuasCartas, 1500);
             armazenaCartasViradas = [];
-        }
-        setTimeout(function () {
-            document.querySelector(".conteudo").classList.remove("sem_clique");
-        }, 1500);
+            setTimeout(function () {
+                document.querySelector(".conteudo").classList.remove("sem_clique");
+            }, 1500);
+        } 
     }
 }
 
